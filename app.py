@@ -82,7 +82,7 @@ def handle_message(event):
                     ],  # 帶入按鈕
                 )
             )
-    elif "推薦" in user_msg:
+    if "推薦" in user_msg:
         reply_text ="🔥 熱門景點推薦 收到"
         try:
             # 向 GAS 請求 spot 工作表的前 5 個景點
@@ -118,7 +118,7 @@ def handle_message(event):
                     ],
                 )
             )
-    elif "景點" in user_msg:
+    if "景點" in user_msg:
         # 去掉「景點」兩個字，取出縣市名稱 (例如從 "台北市景點" 取出 "台北市")
         target_city = user_msg.replace("景點", "").strip()
 
