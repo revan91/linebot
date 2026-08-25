@@ -27,7 +27,7 @@ CHANNEL_SECRET = os.environ.get("LINE_CHANNEL_SECRET")
 # 如果沒設定環境變數，避免直接 Crash，先給預設字串
 handler = WebhookHandler(CHANNEL_SECRET or "dummy_secret")
 configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN or "dummy_token")
-
+chosen_location = ""
 
 @app.route("/", methods=["GET"])
 def health_check():
