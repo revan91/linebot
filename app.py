@@ -82,7 +82,7 @@ def handle_message(event):
                     ],  # 帶入按鈕
                 )
             )
-    elif "推薦景點" in user_msg:
+    elif "推薦" in user_msg:
         try:
             # 向 GAS 請求 spot 工作表的前 5 個景點
             res = requests.get(f"{GAS_WEB_APP_URL}?type=hot_spots", timeout=3)
