@@ -27,7 +27,7 @@ CHANNEL_SECRET = os.environ.get("LINE_CHANNEL_SECRET")
 # 如果沒設定環境變數，避免直接 Crash，先給預設字串
 handler = WebhookHandler(CHANNEL_SECRET or "dummy_secret")
 configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN or "dummy_token")
-chosen_location = ""
+
 
 @app.route("/", methods=["GET"])
 def health_check():
@@ -52,6 +52,7 @@ def handle_message(event):
     user_msg = event.message.text
 
     if "出門" in user_msg:
+
         try:
             res = requests.get(GAS_WEB_APP_URL, timeout=3)
             chosen_location = res.json().get("location", "台北市")
@@ -82,7 +83,7 @@ def handle_message(event):
                     ],  # 帶入按鈕
                 )
             )
-    if "推薦" in user_msg:
+    elif "推薦" in user_msg:
         reply_text ="🔥 熱門景點推薦 收到"
         try:
             # 向 GAS 請求 spot 工作表的前 5 個景點
@@ -118,7 +119,7 @@ def handle_message(event):
                     ],
                 )
             )
-    if "景點" in user_msg:
+    elif "景點" in user_msg:
         # 去掉「景點」兩個字，取出縣市名稱 (例如從 "台北市景點" 取出 "台北市")
         target_city = user_msg.replace("景點", "").strip()
 
@@ -137,7 +138,7 @@ def handle_message(event):
                     action=MessageAction(label="看熱門景點 🏞️", text="推薦景點")
                 ),
                 QuickReplyItem(
-                    action=MessageAction(label="再挑一次 🏞️", text=f"{chosen_location}景點")
+                    action=MessageAction(label="再挑一次 🏞️", text=f"{target_city}景點")
                 ),
             ]
         )
