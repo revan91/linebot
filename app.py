@@ -65,7 +65,7 @@ def handle_message(event):
                     action=MessageAction(label="看熱門景點 🏞️", text="推薦景點")
                 ),
                 QuickReplyItem(
-                    action=MessageAction(label=f"幫我挑{chosen_location}景點 🏞️", text=f"給我{chosen_location}景點")
+                    action=MessageAction(label=f"幫我挑{chosen_location}景點 🏞️", text=f"{chosen_location}景點")
                 ),
             ]
         )
@@ -103,7 +103,7 @@ def handle_message(event):
                     action=MessageAction(label="看熱門景點 🏞️", text="推薦景點")
                 ),
                 QuickReplyItem(
-                    action=MessageAction(label=f"幫我挑{chosen_location}景點 🏞️", text=f"給我{chosen_location}景點")
+                    action=MessageAction(label=f"幫我挑{chosen_location}景點 🏞️", text=f"{chosen_location}景點")
                 ),
             ]
         )
@@ -135,7 +135,7 @@ def handle_message(event):
                     action=MessageAction(label="看熱門景點 🏞️", text="推薦景點")
                 ),
                 QuickReplyItem(
-                    action=MessageAction(label="再挑一次 🏞️", text=f"給我{chosen_location}景點")
+                    action=MessageAction(label="再挑一次 🏞️", text=f"{chosen_location}景點")
                 ),
             ]
         )
