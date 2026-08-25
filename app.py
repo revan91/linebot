@@ -83,9 +83,10 @@ def handle_message(event):
                 )
             )
     elif "推薦" in user_msg:
+        reply_text ="🔥 熱門景點推薦 收到"
         try:
             # 向 GAS 請求 spot 工作表的前 5 個景點
-            res = requests.get(f"{GAS_WEB_APP_URL}?type=hot_spots", timeout=3)
+            res = requests.get(f"{GAS_WEB_APP_URL}?type=hot_spots", timeout=3) 
             hot_spots = res.json().get("hot_spots", [])
             
             if hot_spots:
@@ -121,6 +122,7 @@ def handle_message(event):
         # 去掉「景點」兩個字，取出縣市名稱 (例如從 "台北市景點" 取出 "台北市")
         target_city = user_msg.replace("景點", "").strip()
 
+        reply_text = f"收到【{target_city}】！✨"
         try:
             # 發送 GET 請求並帶上參數 ?city=台北市
             res = requests.get(f"{GAS_WEB_APP_URL}?city={target_city}", timeout=3)
