@@ -71,20 +71,9 @@ def handle_message(event):
             print(f"抓取熱門景點失敗: {e}")
             reply_text = "🔥 熱門景點推薦：\n1. 台北 101\n2. 陽明山國家公園\n3. 逢甲夜市\n4. 駁二藝術特區\n5. 太魯閣國家公園"
 
-        # 避免全域變數未定義當機，提供預設代入值
-        city_label = "台北市"
-
         quick_reply_buttons = QuickReply(
             items=[
-                QuickReplyItem(
-                    action=MessageAction(label="看熱門景點 🏞️", text="推薦景點")
-                ),
-                QuickReplyItem(
-                    action=MessageAction(
-                        label=f"幫我挑{city_label}景點 🏞️",
-                        text=f"{city_label}景點",
-                    )
-                ),
+                QuickReplyItem(action=MessageAction(label="再抽一次 🎲", text="出門")),
             ]
         )
         with ApiClient(configuration) as api_client:
@@ -93,9 +82,7 @@ def handle_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[
-                        TextMessage(
-                            text=reply_text, quick_reply=quick_reply_buttons
-                        )
+                        TextMessage(text=reply_text, quick_reply=quick_reply_buttons)
                     ],
                 )
             )
@@ -110,13 +97,9 @@ def handle_message(event):
 
         quick_reply_buttons = QuickReply(
             items=[
+                QuickReplyItem(action=MessageAction(label="再抽一次 🎲", text="出門")),
                 QuickReplyItem(
-                    action=MessageAction(label="再抽一次 🎲", text="出門")
-                ),
-                QuickReplyItem(
-                    action=MessageAction(
-                        label="看熱門景點 🏞️", text="推薦景點"
-                    )
+                    action=MessageAction(label="看熱門景點 🏞️", text="推薦景點")
                 ),
                 QuickReplyItem(
                     action=MessageAction(
@@ -135,9 +118,7 @@ def handle_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[
-                        TextMessage(
-                            text=reply_text, quick_reply=quick_reply_buttons
-                        )
+                        TextMessage(text=reply_text, quick_reply=quick_reply_buttons)
                     ],
                 )
             )
@@ -152,9 +133,7 @@ def handle_message(event):
         reply_text = f"收到【{target_city}】！✨"
         try:
             # 發送 GET 請求並帶上參數 ?city=台北市
-            res = requests.get(
-                f"{GAS_WEB_APP_URL}?city={target_city}", timeout=3
-            )
+            res = requests.get(f"{GAS_WEB_APP_URL}?city={target_city}", timeout=3)
             data = res.json()
             chosen_spot = data.get("spot", f"{target_city}在地景點")
         except Exception:
@@ -162,18 +141,12 @@ def handle_message(event):
 
         quick_reply_buttons = QuickReply(
             items=[
+                QuickReplyItem(action=MessageAction(label="換個地點 🎲", text="出門")),
                 QuickReplyItem(
-                    action=MessageAction(label="換個地點 🎲", text="出門")
+                    action=MessageAction(label="看熱門景點 🏞️", text="推薦景點")
                 ),
                 QuickReplyItem(
-                    action=MessageAction(
-                        label="看熱門景點 🏞️", text="推薦景點"
-                    )
-                ),
-                QuickReplyItem(
-                    action=MessageAction(
-                        label="再挑一次 🏞️", text=f"{target_city}景點"
-                    )
+                    action=MessageAction(label="再挑一次 🏞️", text=f"{target_city}景點")
                 ),
             ]
         )
@@ -185,9 +158,7 @@ def handle_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[
-                        TextMessage(
-                            text=reply_text, quick_reply=quick_reply_buttons
-                        )
+                        TextMessage(text=reply_text, quick_reply=quick_reply_buttons)
                     ],
                 )
             )
